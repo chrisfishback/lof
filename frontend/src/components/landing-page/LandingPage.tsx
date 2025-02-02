@@ -1,3 +1,14 @@
+import {Box} from "@mui/material";
+import {LandingPageSideBar} from "./LandingPageSideBar.tsx";
+import Content from "./Content.tsx";
+
 export const LandingPage = () => {
-    return (<><h1>Home</h1></>)
+    return (
+        <Box sx={{display: "flex", minHeight: "100vh", background: "#1b3554"}}>
+            <LandingPageSideBar/>
+            <Box sx={{flexGrow: 1, padding: 3}}>
+                <Content/>
+            </Box>
+        </Box>
+    );
 }
