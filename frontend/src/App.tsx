@@ -1,16 +1,20 @@
 import './App.css'
 import {LandingPage} from "./components/landing-page/LandingPage.tsx";
 import {BrowserRouter, Routes, Route} from "react-router";
+import {ThemeProvider} from "@mui/material";
+import theme from "../src/assets/theme.ts";
 
 function App() {
 
     return (
-        <BrowserRouter>
-            <Routes>
-                <Route path={"/"} element={<LandingPage/>}/>
-            </Routes>
-        </BrowserRouter>
-    )
+        <ThemeProvider theme={theme}>
+            <BrowserRouter>
+                <Routes>
+                    <Route path={"/"} element={<LandingPage/>}/>
+                </Routes>
+            </BrowserRouter>
+        </ThemeProvider>
+    );
 }
 
 export default App

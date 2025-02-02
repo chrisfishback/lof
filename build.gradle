@@ -32,3 +32,10 @@ dependencies {
 tasks.named('test') {
 	useJUnitPlatform()
 }
+
+task buildFrontend(type: Exec) {
+	workingDir 'frontend'
+	commandLine 'yarn', 'build'
+}
+
+processResources.dependsOn buildFrontend
