@@ -12,10 +12,6 @@ import java.util.List;
 @RequestMapping("/api/teams")
 public class TeamsController {
 
-    private final TeamsService teamsService;
-
     @GetMapping("/all")
-    public List<TeamsDTO> getAllTeams() {
-        return teamsService.getAllTeams();
-    }
+    public List<TeamsDTO> getAllTeams() {return null;}
 }
