@@ -6,5 +6,6 @@ import lombok.Data;
 @Data
 @Builder
 public class Player {
+    private Long id;
     private String name;
 }

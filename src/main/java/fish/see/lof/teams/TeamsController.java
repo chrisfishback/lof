@@ -9,12 +9,12 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("/api/teams")
+@RequestMapping("/teams")
 public class TeamsController {
 
     private final TeamsService teamsService;
 
-    @GetMapping("/all")
+    @GetMapping()
     public List<Team> getAllTeams() {
         return teamsService.getAllTeams();
     }

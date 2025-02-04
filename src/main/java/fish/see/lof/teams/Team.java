@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 @Data
 @Builder
 public class Team {
+    private Long id;
     private String name;
     private int wins;
     private int losses;
@@ -18,16 +19,18 @@ public class Team {
     public static List<Team> teamEntityToTeam(List<TeamEntity> teams) {
         return teams.stream()
                 .map(teamEntity -> Team.builder()
+                        .id(teamEntity.getId())
                         .name(teamEntity.getName())
                         .wins(teamEntity.getWins())
                         .losses(teamEntity.getLosses())
                         .ties(teamEntity.getTies())
                         .players(teamEntity.getPlayers().stream()
                                 .map(playerEntity -> Player.builder()
+                                        .id(playerEntity.getId())
                                         .name(playerEntity.getName())
                                         .build())
-                                .collect(Collectors.toList())) // Explicitly collect as List<Player>
+                                .collect(Collectors.toList()))
                         .build())
-                .collect(Collectors.toList()); // Explicitly collect as List<Team>
+                .collect(Collectors.toList());
     }
 }

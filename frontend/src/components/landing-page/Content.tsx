@@ -1,4 +1,4 @@
-import { useState } from "react";
+import {useEffect, useState} from "react";
 import {
     Accordion,
     AccordionSummary,
@@ -9,60 +9,12 @@ import {
     Stack
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-
-const teams = [
-    {
-        id: 1,
-        name: "Demacia Lions",
-        wins: 5,
-        losses: 1,
-        ties: 0,
-        players: ["Garen", "Lux", "Jarvan IV", "Fiora", "Xin Zhao"],
-    },
-    {
-        id: 2,
-        name: "Noxian Reapers",
-        wins: 4,
-        losses: 2,
-        ties: 0,
-        players: ["Darius", "Katarina", "Swain", "Draven", "Talon"],
-    },
-    {
-        id: 3,
-        name: "Piltover Enforcers",
-        wins: 3,
-        losses: 3,
-        ties: 0,
-        players: ["Vi", "Caitlyn", "Ezreal", "Jayce", "Heimerdinger"],
-    },
-    {
-        id: 4,
-        name: "Shadow Isles Phantoms",
-        wins: 2,
-        losses: 3,
-        ties: 1,
-        players: ["Thresh", "Elise", "Hecarim", "Kalista", "Yorick"],
-    },
-    {
-        id: 5,
-        name: "Ionia Spirits",
-        wins: 4,
-        losses: 1,
-        ties: 1,
-        players: ["Shen", "Irelia", "Kennen", "Zed", "Akali"],
-    },
-    {
-        id: 6,
-        name: "Freljord Frostborn",
-        wins: 2,
-        losses: 4,
-        ties: 0,
-        players: ["Ashe", "Sejuani", "Tryndamere", "Lissandra", "Braum"],
-    },
-];
+import {Team} from "@/components/types/Team.ts";
+import {getAllTeams} from "../clients/TeamsClient.ts";
 
 const Content = () => {
     const [expanded, setExpanded] = useState<number | false>(false);
+    const [teams, setTeams] = useState<Team[]>([])
 
     const handleExpand = (id: number) => {
         setExpanded(expanded === id ? false : id);
@@ -73,6 +25,10 @@ const Content = () => {
         const pointsB = (b.wins * 2) + b.ties;
         return pointsB - pointsA;
     });
+
+    useEffect(() => {
+        getAllTeams().then(retrievedTeams => setTeams(retrievedTeams))
+    }, []);
 
     return (
         <Box
@@ -94,7 +50,7 @@ const Content = () => {
                 League of Friendship
             </Typography>
 
-            {rankedTeams.map((team, index) => (
+            {rankedTeams && rankedTeams.map((team, index) => (
                 <Accordion
                     key={team.id}
                     expanded={expanded === team.id}
@@ -166,9 +122,9 @@ const Content = () => {
                             pb: 2
                         }}
                     >
-                        {team.players.map((player, index) => (
+                        {team.players && team.players.map((player) => (
                             <Typography
-                                key={index}
+                                key={player.id}
                                 sx={{
                                     color: "#c9aa71",
                                     py: 0.5,
@@ -179,7 +135,7 @@ const Content = () => {
                                     }
                                 }}
                             >
-                                {player}
+                                {player.name}
                             </Typography>
                         ))}
                     </AccordionDetails>
