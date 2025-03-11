@@ -1,1 +1,1 @@
-lof dashboard
+# League of Friendship
