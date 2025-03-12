@@ -35,9 +35,9 @@ export function LandingPageSideBar() {
                 <IconButton sx={{color: "#c9aa71"}}>
                     <Groups/>
                 </IconButton>
-                <IconButton sx={{color: "#c9aa71"}}>
+                {/* <IconButton sx={{color: "#c9aa71"}}>
                     <Leaderboard/>
-                </IconButton>
+                </IconButton> */}
             </Box>
             <Box sx={{height: 20}}/>
         </Drawer>

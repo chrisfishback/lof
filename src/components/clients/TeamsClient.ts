@@ -1,4 +1,5 @@
 import {Team} from "../types/Team.ts";
+import {Player} from "../types/Player.ts";
 import { Client, Databases} from "appwrite"
 
 export const DATABASE_ID = "67cc7d69001be23d37c5";
@@ -20,8 +21,15 @@ export const getAllTeams = async (): Promise<Team[]> => {
     console.log("response")
     console.log(response)
 
-    // Properly map the Document objects to Team objects
-    const teams: Team[] = response.documents.map(doc => doc as unknown as Team);
+    const teams: Team[] = response.documents.map((doc) => ({
+        name: doc.name,
+        wins: doc.wins,
+        losses: doc.losses,
+        ties: doc.ties,
+        players: doc.players.map((player: any) => ({
+            name: player.name
+        } as Player))
+    } as Team));
 
     console.log("teams")
     console.log(teams)
