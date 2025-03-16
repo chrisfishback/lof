@@ -1,5 +1,5 @@
 import {Box, Button, Drawer, IconButton, Typography} from "@mui/material";
-import {Groups, Home, Leaderboard} from "@mui/icons-material";
+import {Groups, Home} from "@mui/icons-material";
 
 export function LandingPageSideBar() {
 
