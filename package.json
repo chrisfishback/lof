@@ -1,6 +1,6 @@
 {
   "name": "lof",
-  "homepage": "https://chrisfishback.github.io/lof",
+  "homepage": "https://leagueoffriendship.lol",
   "private": true,
   "version": "1.0.0",
   "type": "module",
@@ -11,7 +11,7 @@
     "preview": "vite preview",
     "test": "vitest",
     "predeploy": "yarn build",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -d dist" 
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
