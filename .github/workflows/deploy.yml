@@ -1,0 +1,38 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [gh-pages]
+  workflow_dispatch:  # Allows manual triggering
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'yarn'
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Build
+        run: yarn build
+        env:
+          VITE_APPWRITE_PROJECT_ID: ${{ secrets.APPWRITE_LOF_PROJECT_ID }}
+          VITE_APPWRITE_DATABASE_ID: ${{ secrets.APPWRITE_LOF_DB_ID }}
+          VITE_APPWRITE_COLLECTION_ID: ${{ secrets.APPWRITE_TEAM_COLLECTION_ID }}
+
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: dist
+          clean: true
