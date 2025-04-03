@@ -3,7 +3,7 @@ import {Groups, Home} from "@mui/icons-material";
 
 export function LandingPageSideBar() {
 
-    const DRAWER_WIDTH = 64;
+    const DRAWER_WIDTH = 70;
 
     return (
         <Drawer
