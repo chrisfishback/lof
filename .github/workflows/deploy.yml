@@ -36,4 +36,4 @@ jobs:
         with:
           folder: dist  # built files
           branch: gh-pages  # branch to deploy to
-          clean: true  # only source code
+          clean: true  # only built code
