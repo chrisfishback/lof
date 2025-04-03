@@ -2,8 +2,8 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [gh-pages]
-  workflow_dispatch:  # Allows manual triggering
+    branches: [main]  # Triggers on push to main 
+  workflow_dispatch:  
 
 permissions:
   contents: write
@@ -34,5 +34,6 @@ jobs:
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: dist
-          clean: true
+          folder: dist  # built files
+          branch: gh-pages  # branch to deploy to
+          clean: true  # only source code
