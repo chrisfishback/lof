@@ -8,6 +8,6 @@ const client = new Client()
   .setEndpoint('https://cloud.appwrite.io/v1')
   .setProject(PROJECT_ID || '');
 
-const databases = new Databases(client); //code to allow push lol
+const databases = new Databases(client);
 
 export { client, databases, PROJECT_ID, DATABASE_ID, COLLECTION_ID };
