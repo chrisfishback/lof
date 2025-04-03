@@ -1,6 +1,6 @@
 import { Team } from "../types/Team.ts";
 import { Player } from "../types/Player.ts";
-import { databases, DATABASE_ID, COLLECTION_ID } from "../../lib/appwrite";
+import { databases, DATABASE_ID, COLLECTION_ID } from "../../lib/appwrite.ts";
 
 export const getAllTeams = async (): Promise<Team[]> => {
     if (DATABASE_ID && COLLECTION_ID) {
@@ -10,7 +10,7 @@ export const getAllTeams = async (): Promise<Team[]> => {
                 COLLECTION_ID,
             );
 
-            const teams: Team[] = response.documents.map((doc) => ({
+            const teams: Team[] = response.documents.map((doc: any) => ({
                 name: doc.name,
                 wins: doc.wins,
                 losses: doc.losses,
