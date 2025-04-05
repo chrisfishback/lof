@@ -8,11 +8,12 @@ function App() {
 
     return (
         <ThemeProvider theme={theme}>
-            <BrowserRouter>
+            {/* <BrowserRouter>
                 <Routes>
                     <Route path={"/"} element={<LandingPage/>}/>
                 </Routes>
-            </BrowserRouter>
+            </BrowserRouter> */}
+            <LandingPage/>
         </ThemeProvider>
     );
 }

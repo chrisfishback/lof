@@ -1,8 +1,10 @@
 import {Box, Button, Drawer, IconButton, Typography} from "@mui/material";
-import {Groups, Home} from "@mui/icons-material";
+import {Groups, Home, AdminPanelSettings} from "@mui/icons-material";
+import { useNavigate } from "react-router";
 
 export function LandingPageSideBar() {
 
+    let navigate = useNavigate();
     const DRAWER_WIDTH = 70;
 
     return (
@@ -17,29 +19,31 @@ export function LandingPageSideBar() {
                     display: "flex",
                     flexDirection: "column",
                     alignItems: "center",
+                    justifyContent: "space-between",
                     paddingY: 2,
-                    backgroundColor: "#111827", // Dark sidebar
-                    borderRight: "2px solid #c9aa71", // Gold border
+                    backgroundColor: "#111827",
+                    borderRight: "2px solid #c9aa71",
                 },
             }}
         >
-            <Button sx={{mb: 2}}>
-                <Typography variant="h5" sx={{fontWeight: "bold", color: "#c9aa71"}}>
-                    lof
-                </Typography>
-            </Button>
-            <Box sx={{display: "flex", flexDirection: "column", gap: 2}}>
-                <IconButton sx={{color: "#c9aa71"}}>
-                    <Home/>
-                </IconButton>
-                <IconButton sx={{color: "#c9aa71"}}>
-                    <Groups/>
-                </IconButton>
-                {/* <IconButton sx={{color: "#c9aa71"}}>
-                    <Leaderboard/>
-                </IconButton> */}
+            <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+                <Button sx={{mb: 2}}>
+                    <Typography variant="h5" sx={{fontWeight: "bold", color: "#c9aa71"}}>
+                        lof
+                    </Typography>
+                </Button>
+                <Box sx={{display: "flex", flexDirection: "column", gap: 2}}>
+                    <IconButton sx={{color: "#c9aa71"}}>
+                        <Home/>
+                    </IconButton>
+                    <IconButton sx={{color: "#c9aa71"}}>
+                        <Groups/>
+                    </IconButton>
+                </Box>
             </Box>
-            <Box sx={{height: 20}}/>
+            <IconButton sx={{color: "#c9aa71"}} onClick={() => {navigate('/admin')}}>
+                <AdminPanelSettings />
+            </IconButton>
         </Drawer>
     );
 }
