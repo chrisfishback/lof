@@ -10,6 +10,8 @@ export const getAllTeams = async (): Promise<Team[]> => {
                 COLLECTION_ID,
             );
 
+            console.log(response)
+
             const teams: Team[] = response.documents.map((doc: any) => ({
                 name: doc.name,
                 wins: doc.wins,
@@ -20,6 +22,7 @@ export const getAllTeams = async (): Promise<Team[]> => {
                 } as Player))
             } as Team));
             
+            console.log(teams)
             return teams;
         } catch (error) {
             console.error("Error fetching teams:", error);

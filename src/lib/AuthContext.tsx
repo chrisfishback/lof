@@ -18,12 +18,16 @@ export const AuthProvider: FC<{ children: ReactNode }> = ({ children }) => {
   const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
+    // Check if user is already logged in, but don't block rendering
     const checkSession = async () => {
       try {
         const currentUser = await account.get();
         setUser(currentUser);
-        checkIfAdmin(currentUser);
+        
+        // Check admin status
+        checkAdminStatus(currentUser);
       } catch (error) {
+        // This is expected for non-logged in users, so we silence the error
         setUser(null);
         setIsAdmin(false);
       } finally {
@@ -34,28 +38,31 @@ export const AuthProvider: FC<{ children: ReactNode }> = ({ children }) => {
     checkSession();
   }, []);
 
-  const checkIfAdmin = (user: Models.User<Models.Preferences>) => {
-    // Check if the user has isAdmin preference set to true
-    if (user.prefs && user.labels.some(label => label === 'admin')) {
+  const checkAdminStatus = (user: Models.User<Models.Preferences>) => {
+    if (user && user.labels && user.labels.some(label => label === 'admin')) {
       setIsAdmin(true);
-      return;
+    } else {
+      setIsAdmin(false);
     }
-    
-    setIsAdmin(false);
   };
 
   const login = async (email: string, password: string) => {
     const session = await account.createEmailPasswordSession(email, password);
     const loggedInUser = await account.get();
     setUser(loggedInUser);
-    checkIfAdmin(loggedInUser);
+    checkAdminStatus(loggedInUser);
     return session;
   };
 
   const logout = async () => {
-    await account.deleteSession('current');
-    setUser(null);
-    setIsAdmin(false);
+    try {
+      await account.deleteSession('current');
+    } catch (error) {
+      console.error("Error during logout:", error);
+    } finally {
+      setUser(null);
+      setIsAdmin(false);
+    }
   };
 
   const value = {
