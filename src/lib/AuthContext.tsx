@@ -18,16 +18,15 @@ export const AuthProvider: FC<{ children: ReactNode }> = ({ children }) => {
   const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
-    // Check if user is already logged in, but don't block rendering
     const checkSession = async () => {
       try {
+      
         const currentUser = await account.get();
         setUser(currentUser);
-        
-        // Check admin status
+      
         checkAdminStatus(currentUser);
       } catch (error) {
-        // This is expected for non-logged in users, so we silence the error
+      
         setUser(null);
         setIsAdmin(false);
       } finally {

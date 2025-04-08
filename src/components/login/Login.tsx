@@ -18,7 +18,7 @@ export const LoginPage: React.FC = () => {
       await login(email, password);
       navigate('/admin');
     } catch (err) {
-      setError('Failed to login. Please check your credentials.');
+      setError('Failed to login. Incorrect email or password.');
       console.error(err);
     }
   };
