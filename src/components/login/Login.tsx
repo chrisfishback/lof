@@ -92,8 +92,8 @@ export const LoginPage: React.FC = () => {
         <Button 
           type="submit" 
           fullWidth 
-          variant="contained" 
-          sx={{ mt: 2, bgcolor: '#e35c22', '&:hover': { bgcolor: '#d14c12' } }}
+          variant="contained"
+          sx={{ mt: 2, bgcolor: 'rgb(213, 166, 78)', '&:hover': { bgcolor: 'rgb(208, 180, 127)' } }}
         >
           Login
         </Button>

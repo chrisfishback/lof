@@ -29,7 +29,6 @@ const Content = () => {
     useEffect(() => {
         getAllTeams().then(retrievedTeams => {
             setTeams(retrievedTeams)
-            console.log("grabbed teams: ", retrievedTeams)
         })
     }, []);
 

@@ -40,7 +40,7 @@ export function LandingPageSideBar() {
                     justifyContent: "space-between",
                     paddingY: 2,
                     backgroundColor: "#111827",
-                    borderRight: "2px solid #c9aa71",
+                    borderRight: "2px solid rgb(201, 170, 113)",
                 },
             }}
         >
@@ -67,25 +67,21 @@ export function LandingPageSideBar() {
             <Box sx={{ display: "flex", flexDirection: "column", gap: 2, alignItems: "center" }}>
                 <Tooltip title={isAdmin ? "Admin Panel" : "Admin Login"} placement="right">
                     <IconButton 
-                        sx={{ color: user && isAdmin ? "#c9aa71" : "rgba(201, 170, 113, 0.5)" }} 
+                        sx={{ color: user && isAdmin ? "#c9aa71" : "rgba(70, 70, 70, 0.5)" }} 
                         onClick={handleAdminClick}
                     >
                         <AdminPanelSettings />
                     </IconButton>
                 </Tooltip>
 
-                {user ? (
+                {isAdmin ? (
                     <Tooltip title="Logout" placement="right">
                         <IconButton sx={{ color: "#c9aa71" }} onClick={handleLogout}>
                             <Logout />
                         </IconButton>
                     </Tooltip>
                 ) : (
-                    <Tooltip title="Login" placement="right">
-                        <IconButton sx={{ color: "#c9aa71" }} onClick={() => navigate('/login')}>
-                            <Login />
-                        </IconButton>
-                    </Tooltip>
+                    <></>
                 )}
             </Box>
         </Drawer>
