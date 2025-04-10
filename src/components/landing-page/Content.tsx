@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import {
     Accordion,
     AccordionSummary,
@@ -9,10 +9,12 @@ import {
     Stack
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import {Team} from "@/components/types/Team.ts";
+import {Team} from "../../components/types/Team.ts";
 import {getAllTeams} from "../clients/TeamsClient.ts";
+import { TeamContext } from "../../lib/TeamContext.tsx";
 
 const Content = () => {
+    const teamsContext = useContext(TeamContext)
     const [expanded, setExpanded] = useState<number | false>(false);
     const [teams, setTeams] = useState<Team[]>([])
 
@@ -27,10 +29,8 @@ const Content = () => {
     });
 
     useEffect(() => {
-        getAllTeams().then(retrievedTeams => {
-            setTeams(retrievedTeams)
-        })
-    }, []);
+        setTeams(teamsContext.teams)
+    }, [teamsContext.loading]);
 
     return (
         <Box

@@ -17,10 +17,8 @@ export function LandingPageSideBar() {
         if (user && isAdmin) {
             navigate('/admin');
         } else if (user) {
-            // User is logged in but not admin
             alert("You don't have admin privileges");
         } else {
-            // Not logged in, redirect to login
             navigate('/login');
         }
     };
