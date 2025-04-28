@@ -10,7 +10,6 @@ import {
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import {Team} from "../../components/types/Team.ts";
-import {getAllTeams} from "../clients/TeamsClient.ts";
 import { TeamContext } from "../../lib/TeamContext.tsx";
 
 const Content = () => {

@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 
 import { TeamContext } from "../../lib/TeamContext.tsx"
 import { Player } from "../types/Player.ts";
-import { Accordion, AccordionDetails, AccordionSummary, Box, Button, IconButton, Stack, TextField, Typography } from "@mui/material";
+import { Accordion, AccordionDetails, AccordionSummary, Box, Button, IconButton, Stack, TextField } from "@mui/material";
 import EditIcon from '@mui/icons-material/Edit';
 import SaveIcon from '@mui/icons-material/Save';
 import CheckIcon from '@mui/icons-material/Check';
@@ -12,7 +12,7 @@ import { Team } from "../types/Team.ts";
 
 export const EditTeams = () => {
 
-    const { teams, loading, error, addTeam, addPlayerToTeam, removePlayerFromTeam } = useContext(TeamContext);
+    const { teams, addTeam, addPlayerToTeam } = useContext(TeamContext);
     const [expanded, setExpanded] = useState<number | false>(false);
 
     const [editingPlayerId, setEditingPlayerId] = useState<string | null>(null);
