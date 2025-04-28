@@ -1,5 +1,5 @@
 import { Box, Button, Drawer, IconButton, Typography, Tooltip } from "@mui/material";
-import { Groups, Home, AdminPanelSettings, Login, Logout } from "@mui/icons-material";
+import { Groups, Home, AdminPanelSettings, Logout } from "@mui/icons-material";
 import { useNavigate } from "react-router";
 import { useAuth } from "../../lib/AuthContext";
 
