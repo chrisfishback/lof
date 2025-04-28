@@ -1,7 +1,7 @@
 import { createContext, FC, ReactNode, useEffect, useState } from "react";
 import { Player } from "../components/types/Player";
 import { Team } from "../components/types/Team";
-import { getAllTeams } from "../components/clients/TeamsClient";
+import { getAllTeams, savePlayerToTeam, saveTeam } from "../components/clients/TeamsClient";
 
 interface TeamContextType {
     teams: Team[];
@@ -52,13 +52,18 @@ export const TeamProvider: FC<{ children: ReactNode }> = ({ children }) => {
 
 
   const addTeam = (team: Team) => {
+    saveTeam(team)
     setTeams(prevTeams => [...prevTeams, team]);
   };
 
-  const addPlayerToTeam = (teamName: string, player: Player) => {
+  const addPlayerToTeam = (teamId: string, player: Player) => {
+    console.log("team id - ", teamId)
+    console.log(teams)
     setTeams(prevTeams => 
       prevTeams.map(team => {
-        if (team.name === teamName) {
+        if (team.id === teamId) {
+          savePlayerToTeam(teamId, player)
+
           return {
             ...team,
             players: [...team.players, player]

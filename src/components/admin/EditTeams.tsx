@@ -2,12 +2,13 @@ import { useContext, useState } from "react";
 
 import { TeamContext } from "../../lib/TeamContext.tsx"
 import { Player } from "../types/Player.ts";
-import { Accordion, AccordionDetails, AccordionSummary, Box, IconButton, Stack, TextField, Typography } from "@mui/material";
+import { Accordion, AccordionDetails, AccordionSummary, Box, Button, IconButton, Stack, TextField, Typography } from "@mui/material";
 import EditIcon from '@mui/icons-material/Edit';
 import SaveIcon from '@mui/icons-material/Save';
 import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
 import AddCircleOutlineRoundedIcon from '@mui/icons-material/AddCircleOutlineRounded';
+import { Team } from "../types/Team.ts";
 
 export const EditTeams = () => {
 
@@ -20,13 +21,15 @@ export const EditTeams = () => {
     const [newPlayerName, setNewPlayerName] = useState<string>('');
     const [isAddingPlayer, setIsAddingPlayer] = useState<string | null>(null);
 
-    const handleEdit = (player: Player) => {
+    const [newTeamName, setNewTeamName] = useState<string>('');
+    const [isAddingTeam, setIsAddingTeam] = useState<boolean>(false);
+
+    const handleEditPlayer = (player: Player) => {
         setEditingPlayerId(player.name);
         setEditedPlayerName(player.name);
     };
 
-    const handleSave = (teamId: string, playerId: string) => {
-        //just a setup
+    const handleSavePlayer = (teamId: string, playerId: string) => {
         console.log(`Saving player ${playerId} in team ${teamId} with new name: ${editedPlayerName}`);
         setEditingPlayerId(null);
     };
@@ -39,12 +42,16 @@ export const EditTeams = () => {
         setNewPlayerName(e.target.value);
     };
 
-    const handleAddPlayerClick = (teamId: string) => {
-        setIsAddingPlayer(teamId);
+    const handleNewTeamNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setNewTeamName(e.target.value);
+    };
+
+    const handleAddNewPlayerButtonClick = (teamName: string) => {
+        setIsAddingPlayer(teamName);
         setNewPlayerName('');
     };
 
-    const handleAddPlayer = (teamId: string) => {
+    const handleSaveNewPlayer = (teamId: string) => {
         if (newPlayerName.trim() !== '') {
             addPlayerToTeam(teamId, { name: newPlayerName });
             setNewPlayerName('');
@@ -55,6 +62,30 @@ export const EditTeams = () => {
     const handleCancelAddPlayer = () => {
         setIsAddingPlayer(null);
         setNewPlayerName('');
+    };
+
+    const handleAddTeamClick = () => {
+        setIsAddingTeam(true);
+        setNewTeamName('');
+    };
+
+    const handleAddTeam = () => {
+        if (newTeamName.trim() !== '') {
+            addTeam({
+                name: newTeamName, 
+                wins: 0,
+                losses: 0,
+                ties: 0,
+                players: [] as Player[] 
+            } as Team);
+            setNewTeamName('');
+            setIsAddingTeam(false);
+        }
+    };
+
+    const handleCancelAddTeam = () => {
+        setIsAddingTeam(false);
+        setNewTeamName('');
     };
 
     return (
@@ -79,17 +110,17 @@ export const EditTeams = () => {
                                         onChange={handlePlayerNameChange}
                                     />
                                     {editingPlayerId === player.name ? (
-                                        <IconButton onClick={() => handleSave(team.name, player.name)}>
+                                        <IconButton onClick={() => handleSavePlayer(team.name, player.name)}>
                                             <SaveIcon />
                                         </IconButton>
                                     ) : (
-                                        <IconButton onClick={() => handleEdit(player)}>
+                                        <IconButton onClick={() => handleEditPlayer(player)}>
                                             <EditIcon />
                                         </IconButton>
                                     )}
                                 </Stack>
                             ))}
-                            
+
                             {isAddingPlayer === team.name ? (
                                 <Stack direction={'row'} spacing={1} marginTop={1}>
                                     <TextField
@@ -100,7 +131,7 @@ export const EditTeams = () => {
                                         size="small"
                                         autoFocus
                                     />
-                                    <IconButton onClick={() => handleAddPlayer(team.name)} color="primary">
+                                    <IconButton onClick={() => handleSaveNewPlayer(team.id)} color="primary">
                                         <CheckIcon />
                                     </IconButton>
                                     <IconButton onClick={handleCancelAddPlayer}>
@@ -108,13 +139,40 @@ export const EditTeams = () => {
                                     </IconButton>
                                 </Stack>
                             ) : (
-                                <IconButton onClick={() => handleAddPlayerClick(team.name)}>
+                                <IconButton onClick={() => handleAddNewPlayerButtonClick(team.name)}>
                                     <AddCircleOutlineRoundedIcon />
                                 </IconButton>
                             )}
                         </AccordionDetails>
                     </Accordion>
                 ))}
+
+                {isAddingTeam ? (
+                    <Stack direction={'row'} spacing={1} marginTop={2}>
+                        <TextField
+                            value={newTeamName}
+                            onChange={handleNewTeamNameChange}
+                            placeholder="New team name"
+                            size="small"
+                            autoFocus
+                        />
+                        <IconButton onClick={handleAddTeam} color="primary">
+                            <CheckIcon />
+                        </IconButton>
+                        <IconButton onClick={handleCancelAddTeam}>
+                            <CloseIcon />
+                        </IconButton>
+                    </Stack>
+                ) : (
+                    <Button
+                        variant="outlined"
+                        startIcon={<AddCircleOutlineRoundedIcon />}
+                        onClick={handleAddTeamClick}
+                        sx={{ mt: 2 }}
+                    >
+                        Add Team
+                    </Button>
+                )}
             </Stack>
         </Box>
     )
