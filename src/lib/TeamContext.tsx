@@ -57,7 +57,7 @@ export const TeamProvider: FC<{ children: ReactNode }> = ({ children }) => {
   };
 
   const addPlayerToTeam = (teamId: string, player: Player) => {
-    console.log("team id - ", teamId)
+    //console.log("team id - ", teamId)
     console.log(teams)
     setTeams(prevTeams => 
       prevTeams.map(team => {

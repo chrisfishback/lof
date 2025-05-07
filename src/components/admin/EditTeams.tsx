@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 
 import { TeamContext } from "../../lib/TeamContext.tsx"
 import { Player } from "../types/Player.ts";
-import { Accordion, AccordionDetails, AccordionSummary, Box, Button, IconButton, Stack, TextField } from "@mui/material";
+import { Accordion, AccordionDetails, AccordionSummary, Box, Button, IconButton, Stack, TextField, Typography } from "@mui/material";
 import EditIcon from '@mui/icons-material/Edit';
 import SaveIcon from '@mui/icons-material/Save';
 import CheckIcon from '@mui/icons-material/Check';
@@ -30,7 +30,7 @@ export const EditTeams = () => {
     };
 
     const handleSavePlayer = (teamId: string, playerId: string) => {
-        console.log(`Saving player ${playerId} in team ${teamId} with new name: ${editedPlayerName}`);
+        //console.log(`Saving player ${playerId} in team ${teamId} with new name: ${editedPlayerName}`);
         setEditingPlayerId(null);
     };
 
@@ -72,11 +72,11 @@ export const EditTeams = () => {
     const handleAddTeam = () => {
         if (newTeamName.trim() !== '') {
             addTeam({
-                name: newTeamName, 
+                name: newTeamName,
                 wins: 0,
                 losses: 0,
                 ties: 0,
-                players: [] as Player[] 
+                players: [] as Player[]
             } as Team);
             setNewTeamName('');
             setIsAddingTeam(false);
@@ -91,6 +91,9 @@ export const EditTeams = () => {
     return (
         <Box>
             <Stack direction={'column'} padding={2}>
+                <Typography variant="h5" gutterBottom>
+                    Edit Teams
+                </Typography>
                 {teams && teams.map((team, index) => (
                     <Accordion
                         key={index}
