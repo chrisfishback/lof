@@ -1,5 +1,5 @@
 import { Box, Button, Drawer, IconButton, Typography, Tooltip } from "@mui/material";
-import { Groups, Home, AdminPanelSettings, Logout } from "@mui/icons-material";
+import { Groups, Home, AdminPanelSettings, Logout, LiveTv } from "@mui/icons-material";
 import { useNavigate } from "react-router";
 import { useAuth } from "../../lib/AuthContext";
 
@@ -59,13 +59,21 @@ export function LandingPageSideBar() {
                             <Groups />
                         </IconButton>
                     </Tooltip>
+                    <Tooltip title="Go to Stream" placement="right">
+                        <IconButton
+                            sx={{ color: "#c9aa71" }}
+                            onClick={() => window.open('https://www.twitch.tv/lofseries', '_blank', 'noopener,noreferrer')}
+                        >
+                            <LiveTv />
+                        </IconButton>
+                    </Tooltip>
                 </Box>
             </Box>
 
             <Box sx={{ display: "flex", flexDirection: "column", gap: 2, alignItems: "center" }}>
                 <Tooltip title={isAdmin ? "Admin Panel" : "Admin Login"} placement="right">
-                    <IconButton 
-                        sx={{ color: user && isAdmin ? "#c9aa71" : "rgba(70, 70, 70, 0.5)" }} 
+                    <IconButton
+                        sx={{ color: user && isAdmin ? "#c9aa71" : "rgba(70, 70, 70, 0.5)" }}
                         onClick={handleAdminClick}
                     >
                         <AdminPanelSettings />

@@ -1,4 +1,4 @@
-import {useContext, useEffect, useState} from "react";
+import { useContext, useEffect, useState } from "react";
 import {
     Accordion,
     AccordionSummary,
@@ -9,13 +9,17 @@ import {
     Stack
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import {Team} from "../../components/types/Team.ts";
+import { Team } from "../../components/types/Team.ts";
 import { TeamContext } from "../../lib/TeamContext.tsx";
+import { useNavigate } from "react-router";
+import { Player } from "../types/Player.ts";
 
 const Content = () => {
     const teamsContext = useContext(TeamContext)
     const [expanded, setExpanded] = useState<number | false>(false);
     const [teams, setTeams] = useState<Team[]>([])
+
+    const navigate = useNavigate();
 
     const handleExpand = (id: number) => {
         setExpanded(expanded === id ? false : id);
@@ -30,6 +34,22 @@ const Content = () => {
     useEffect(() => {
         setTeams(teamsContext.teams)
     }, [teamsContext.loading]);
+
+    const teamReportLink = (players: Player[]): string => {
+        if (!players || players.length === 0) {
+            return "";
+        }
+
+        // Clean player names by removing anything after '#' and encode for URL
+        const cleanedNames = players.map(player => {
+            const cleanName = player.name.split('#')[0];
+            return encodeURIComponent(cleanName);
+        });
+
+        const summonersParam = cleanedNames.join('%2C');
+
+        return `https://op.gg/lol/multisearch/na?summoners=${summonersParam}`;
+    }
 
     return (
         <Box
@@ -83,6 +103,19 @@ const Content = () => {
                             </span>
                             <span style={{ color: "#c9aa71", margin: "0 8px" }}>|</span>
                             {team.name}
+                            <a
+                                href={teamReportLink(team.players)}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                style={{
+                                    marginLeft: '10px',
+                                    color: '#4dabf5',
+                                    textDecoration: 'none',
+                                    cursor: 'pointer',
+                                    fontSize: '10px'
+                                }}
+                            >Scouting Report →
+                            </a>
                         </Typography>
                         <Stack direction="row" spacing={1} sx={{ mr: 2 }}>
                             <Chip
