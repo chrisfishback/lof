@@ -11,15 +11,12 @@ import {
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { Team } from "../../components/types/Team.ts";
 import { TeamContext } from "../../lib/TeamContext.tsx";
-import { useNavigate } from "react-router";
 import { Player } from "../types/Player.ts";
 
 const Content = () => {
     const teamsContext = useContext(TeamContext)
     const [expanded, setExpanded] = useState<number | false>(false);
     const [teams, setTeams] = useState<Team[]>([])
-
-    const navigate = useNavigate();
 
     const handleExpand = (id: number) => {
         setExpanded(expanded === id ? false : id);
