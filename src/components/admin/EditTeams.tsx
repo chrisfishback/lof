@@ -30,7 +30,7 @@ export const EditTeams = () => {
     };
 
     const handleSavePlayer = (teamId: string, playerId: string) => {
-        //console.log(`Saving player ${playerId} in team ${teamId} with new name: ${editedPlayerName}`);
+        console.log(`Saving player ${playerId} in team ${teamId} with new name: ${editedPlayerName}`);
         setEditingPlayerId(null);
     };
 

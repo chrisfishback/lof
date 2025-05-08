@@ -24,15 +24,9 @@ import {
     Check as CheckIcon,
     AddCircleOutline as AddCircleOutlineIcon,
 EmojiEvents as TrophyIcon,
-Expand,
 ExpandMore
 } from '@mui/icons-material';
 import { TeamContext } from "../../lib/TeamContext.tsx"
-
-interface Team {
-    id: string;
-    name: string;
-}
 
 interface Match {
     id: string;
