@@ -26,7 +26,7 @@ interface MatchProps {
   position: 'top' | 'bottom';
 }
 
-const Match: React.FC<MatchProps> = ({ team1, team2, winner, position }) => {
+const Match: React.FC<MatchProps> = ({ team1, team2, winner }) => {
   return (
     <Paper 
       elevation={2} 
