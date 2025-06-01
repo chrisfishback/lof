@@ -12,6 +12,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { Team } from "../../components/types/Team.ts";
 import { TeamContext } from "../../lib/TeamContext.tsx";
 import { Player } from "../types/Player.ts";
+import TournamentBracket from "./TournamentBracket.tsx";
 
 const Content = () => {
     const teamsContext = useContext(TeamContext)
@@ -49,6 +50,7 @@ const Content = () => {
     }
 
     return (
+        <>
         <Box
             sx={{
                 width: "80%",
@@ -133,15 +135,6 @@ const Content = () => {
                                     minWidth: '70px'
                                 }}
                             />
-                            <Chip
-                                label={`T: ${team.ties}`}
-                                sx={{
-                                    backgroundColor: '#1e40af',
-                                    color: '#fff',
-                                    fontWeight: 'bold',
-                                    minWidth: '70px'
-                                }}
-                            />
                         </Stack>
                     </AccordionSummary>
 
@@ -173,6 +166,8 @@ const Content = () => {
                 </Accordion>
             ))}
         </Box>
+        <TournamentBracket/>
+        </>
     );
 };
 
