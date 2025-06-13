@@ -171,7 +171,7 @@ const TournamentBracket: React.FC = () => {
     semifinals: [
       {
         team1: 'Feet Finders',
-        team2: 'Cucks/Facecheck',
+        team2: 'Face My Zipper',
         date: 'June 16th',
         winner: undefined // Set winner when known
       },
@@ -179,7 +179,7 @@ const TournamentBracket: React.FC = () => {
         team1: 'Tanner Time',
         team2: 'Fizz on your Jayce',
         date: 'June 11th',
-        winner: undefined // Set winner when known
+        winner: 'Fizz on your Jayce' // Set winner when known
       }
     ],
     championship: {
